@@ -1,0 +1,80 @@
+﻿.timer-card {
+  margin: 36px auto 28px;
+  padding: 30px 32px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  text-align: center;
+  width: min(520px, 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.timer-card__tabs {
+  display: inline-flex;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 6px;
+  border-radius: 10px;
+  gap: 6px;
+}
+
+.timer-card__tab {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.timer-card__tab--active {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+.timer-card__time {
+  font-size: clamp(64px, 10vw, 112px);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 24px 0 18px;
+  letter-spacing: 2px;
+}
+
+.timer-card__start {
+  background: #ffffff;
+  color: #ba3f3f;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 52px;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.timer-card__reset {
+  margin-top: 10px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.timer-card__meta {
+  margin-top: 22px;
+  display: grid;
+  gap: 8px;
+  color: #ffffff;
+}
+
+.timer-card__round {
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.timer-card__message {
+  font-size: 16px;
+}
