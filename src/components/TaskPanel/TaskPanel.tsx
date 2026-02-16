@@ -6,7 +6,7 @@ type TaskPanelProps = {
   tasks: Task[]
   activeTaskId: string | null
   onSelectTask: (id: string) => void
-  onAddTask: (title: string) => void
+  onAddTask: (title: string, note?: string) => void
   onToggleTask: (id: string) => void
   onDeleteTask: (id: string) => void
 }
@@ -21,6 +21,7 @@ function TaskPanel({
 }: TaskPanelProps) {
   const [isAdding, setIsAdding] = useState(false)
   const [title, setTitle] = useState('')
+  const [note, setNote] = useState('')
 
   const handleSave = () => {
     const trimmed = title.trim()
@@ -28,13 +29,15 @@ function TaskPanel({
       return
     }
 
-    onAddTask(trimmed)
+    onAddTask(trimmed, note)
     setTitle('')
+    setNote('')
     setIsAdding(false)
   }
 
   const handleCancel = () => {
     setTitle('')
+    setNote('')
     setIsAdding(false)
   }
 
@@ -105,6 +108,17 @@ function TaskPanel({
             placeholder="What are you working on?"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
+          />
+          <label className="task-panel__note-label" htmlFor="task-note">
+            Note (optional)
+          </label>
+          <textarea
+            id="task-note"
+            className="task-panel__textarea"
+            placeholder="Add context for this task"
+            value={note}
+            onChange={(event) => setNote(event.target.value)}
+            rows={3}
           />
           <div className="task-panel__form-actions">
             <button className="task-panel__save" type="button" onClick={handleSave}>
