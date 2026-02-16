@@ -2,6 +2,10 @@
 import type { Task } from './taskTypes'
 import { loadTasks, saveTasks } from './tasksStorage'
 
+type TaskUpdatePatch = Partial<
+  Pick<Task, 'title' | 'note' | 'estimatedPomodoros'>
+>
+
 const createId = (): string => {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID()
@@ -83,6 +87,46 @@ export function useTasks() {
     )
   }, [])
 
+  const updateTask = useCallback((id: string, patch: TaskUpdatePatch) => {
+    setTasks((prev) =>
+      sortByCreatedAt(
+        prev.map((task) => {
+          if (task.id !== id) {
+            return task
+          }
+
+          if (typeof patch.title === 'string') {
+            const trimmedTitle = patch.title.trim()
+            if (!trimmedTitle) {
+              return task
+            }
+          }
+
+          const nextTitle =
+            typeof patch.title === 'string' ? patch.title.trim() : task.title
+
+          const hasEstimatedUpdate =
+            typeof patch.estimatedPomodoros === 'number' &&
+            Number.isFinite(patch.estimatedPomodoros)
+          const nextEstimated = hasEstimatedUpdate
+            ? Math.max(1, Math.floor(patch.estimatedPomodoros))
+            : task.estimatedPomodoros
+
+          const nextCompleted = Math.min(task.completedPomodoros, nextEstimated)
+          const nextNote = 'note' in patch ? patch.note?.trim() || undefined : task.note
+
+          return {
+            ...task,
+            title: nextTitle,
+            note: nextNote,
+            estimatedPomodoros: nextEstimated,
+            completedPomodoros: nextCompleted,
+          }
+        }),
+      ),
+    )
+  }, [])
+
   return useMemo(
     () => ({
       tasks,
@@ -93,6 +137,7 @@ export function useTasks() {
       clearCompleted,
       setActiveTask,
       incrementTaskPomodoro,
+      updateTask,
     }),
     [
       tasks,
@@ -103,6 +148,7 @@ export function useTasks() {
       clearCompleted,
       setActiveTask,
       incrementTaskPomodoro,
+      updateTask,
     ],
   )
 }
