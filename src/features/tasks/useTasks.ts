@@ -21,11 +21,13 @@ export function useTasks() {
     saveTasks(tasks)
   }, [tasks])
 
-  const addTask = useCallback((title: string) => {
+  const addTask = useCallback((title: string, note?: string) => {
     const trimmed = title.trim()
     if (!trimmed) {
       return
     }
+
+    const normalizedNote = note?.trim()
 
     const newTask: Task = {
       id: createId(),
@@ -34,7 +36,7 @@ export function useTasks() {
       createdAt: Date.now(),
       estimatedPomodoros: 1,
       completedPomodoros: 0,
-      note: undefined,
+      note: normalizedNote ? normalizedNote : undefined,
     }
 
     setTasks((prev) => sortByCreatedAt([newTask, ...prev]))
