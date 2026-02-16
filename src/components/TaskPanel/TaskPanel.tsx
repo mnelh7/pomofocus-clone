@@ -75,12 +75,17 @@ function TaskPanel({
                       checked={task.completed}
                       onChange={() => onToggleTask(task.id)}
                     />
-                    <span
-                      className={`task-panel__item-title ${
-                        task.completed ? 'task-panel__item-title--done' : ''
-                      }`}
-                    >
-                      {task.title}
+                    <span className="task-panel__item-text">
+                      <span
+                        className={`task-panel__item-title ${
+                          task.completed ? 'task-panel__item-title--done' : ''
+                        }`}
+                      >
+                        {task.title}
+                      </span>
+                      {task.note?.trim() && (
+                        <span className="task-panel__item-note">{task.note.trim()}</span>
+                      )}
                     </span>
                   </label>
                   <span className="task-panel__progress">
