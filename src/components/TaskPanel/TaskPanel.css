@@ -124,6 +124,16 @@
   padding: 6px;
 }
 
+.task-panel__edit {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.82);
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
 .task-panel__form {
   border: 2px dashed rgba(255, 255, 255, 0.4);
   border-radius: 10px;

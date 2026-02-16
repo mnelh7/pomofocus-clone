@@ -9,6 +9,7 @@ function Home() {
     tasks,
     activeTaskId,
     addTask,
+    updateTask,
     toggleTask,
     deleteTask,
     setActiveTask,
@@ -41,6 +42,7 @@ function Home() {
           activeTaskId={activeTaskId}
           onSelectTask={setActiveTask}
           onAddTask={addTask}
+          onUpdateTask={updateTask}
           onToggleTask={toggleTask}
           onDeleteTask={deleteTask}
         />

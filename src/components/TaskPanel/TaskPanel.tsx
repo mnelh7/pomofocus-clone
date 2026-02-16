@@ -7,6 +7,7 @@ type TaskPanelProps = {
   activeTaskId: string | null
   onSelectTask: (id: string) => void
   onAddTask: (title: string, note?: string) => void
+  onUpdateTask: (id: string, patch: Partial<Pick<Task, 'title' | 'note'>>) => void
   onToggleTask: (id: string) => void
   onDeleteTask: (id: string) => void
 }
@@ -16,12 +17,15 @@ function TaskPanel({
   activeTaskId,
   onSelectTask,
   onAddTask,
+  onUpdateTask,
   onToggleTask,
   onDeleteTask,
 }: TaskPanelProps) {
   const [isAdding, setIsAdding] = useState(false)
+  const [editingTaskId, setEditingTaskId] = useState<string | null>(null)
   const [title, setTitle] = useState('')
   const [note, setNote] = useState('')
+  const isFormVisible = isAdding || editingTaskId !== null
 
   const handleSave = () => {
     const trimmed = title.trim()
@@ -29,16 +33,37 @@ function TaskPanel({
       return
     }
 
-    onAddTask(trimmed, note)
+    if (editingTaskId) {
+      onUpdateTask(editingTaskId, { title: trimmed, note })
+    } else {
+      onAddTask(trimmed, note)
+    }
+
     setTitle('')
     setNote('')
     setIsAdding(false)
+    setEditingTaskId(null)
   }
 
   const handleCancel = () => {
     setTitle('')
     setNote('')
     setIsAdding(false)
+    setEditingTaskId(null)
+  }
+
+  const handleEnterEditMode = (task: Task) => {
+    setEditingTaskId(task.id)
+    setIsAdding(false)
+    setTitle(task.title)
+    setNote(task.note ?? '')
+  }
+
+  const handleEnterAddMode = () => {
+    setIsAdding(true)
+    setEditingTaskId(null)
+    setTitle('')
+    setNote('')
   }
 
   return (
@@ -93,6 +118,13 @@ function TaskPanel({
                   </span>
                 </button>
                 <button
+                  className="task-panel__edit"
+                  type="button"
+                  onClick={() => handleEnterEditMode(task)}
+                >
+                  Edit
+                </button>
+                <button
                   className="task-panel__delete"
                   type="button"
                   onClick={() => onDeleteTask(task.id)}
@@ -105,12 +137,12 @@ function TaskPanel({
         </ul>
       )}
 
-      {isAdding ? (
+      {isFormVisible ? (
         <div className="task-panel__form">
           <input
             className="task-panel__input"
             type="text"
-            placeholder="What are you working on?"
+            placeholder={editingTaskId ? 'Update task title' : 'What are you working on?'}
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
@@ -135,7 +167,7 @@ function TaskPanel({
           </div>
         </div>
       ) : (
-        <button className="task-panel__add" type="button" onClick={() => setIsAdding(true)}>
+        <button className="task-panel__add" type="button" onClick={handleEnterAddMode}>
           <span className="task-panel__add-icon" aria-hidden="true">＋</span>
           Add Task
         </button>

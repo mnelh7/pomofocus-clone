@@ -105,12 +105,11 @@ export function useTasks() {
           const nextTitle =
             typeof patch.title === 'string' ? patch.title.trim() : task.title
 
-          const hasEstimatedUpdate =
-            typeof patch.estimatedPomodoros === 'number' &&
-            Number.isFinite(patch.estimatedPomodoros)
-          const nextEstimated = hasEstimatedUpdate
-            ? Math.max(1, Math.floor(patch.estimatedPomodoros))
-            : task.estimatedPomodoros
+          const estimatedValue = patch.estimatedPomodoros
+          const nextEstimated =
+            typeof estimatedValue === 'number' && Number.isFinite(estimatedValue)
+              ? Math.max(1, Math.floor(estimatedValue))
+              : task.estimatedPomodoros
 
           const nextCompleted = Math.min(task.completedPomodoros, nextEstimated)
           const nextNote = 'note' in patch ? patch.note?.trim() || undefined : task.note
