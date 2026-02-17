@@ -4,6 +4,10 @@
   justify-content: space-between;
   padding: 22px 0 18px;
   border-bottom: 1px solid var(--border);
+  transition:
+    border-color var(--theme-transition) ease,
+    color var(--theme-transition) ease,
+    background-color var(--theme-transition) ease;
 }
 
 .header__left {
@@ -82,4 +86,5 @@
     flex-wrap: wrap;
   }
 }
+
 

@@ -7,6 +7,7 @@
   --button-bg: #ffffff;
   --button-text: #ba3f3f;
   --border: rgba(255, 255, 255, 0.2);
+  --theme-transition: 420ms;
   font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -34,6 +35,9 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
+  transition:
+    background-color var(--theme-transition) ease,
+    color var(--theme-transition) ease;
 }
 
 #root {
@@ -44,6 +48,9 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
+  transition:
+    background-color var(--theme-transition) ease,
+    color var(--theme-transition) ease;
 }
 
 .home {
@@ -66,3 +73,4 @@ img {
   max-width: 100%;
   display: block;
 }
+
