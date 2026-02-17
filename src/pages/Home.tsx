@@ -30,32 +30,35 @@ function Home() {
   const activeTaskPomodoroIndex = activeTask
     ? Math.min(activeTask.completedPomodoros + 1, activeTask.estimatedPomodoros)
     : 1
+  const theme = state.mode === 'pomodoro' ? 'focus' : 'break'
 
   return (
-    <div className="home">
-      <Header />
-      <main className="home__main">
-        <TimerCard
-          mode={state.mode}
-          status={state.status}
-          displayTime={displayTime}
-          activeTaskTitle={activeTask?.title}
-          activeTaskPomodoroIndex={activeTaskPomodoroIndex}
-          onStart={start}
-          onPause={pause}
-          onReset={reset}
-          onSetMode={setMode}
-        />
-        <TaskPanel
-          tasks={tasks}
-          activeTaskId={activeTaskId}
-          onSelectTask={setActiveTask}
-          onAddTask={addTask}
-          onUpdateTask={updateTask}
-          onToggleTask={toggleTask}
-          onDeleteTask={deleteTask}
-        />
-      </main>
+    <div className="app-shell" data-theme={theme}>
+      <div className="home">
+        <Header />
+        <main className="home__main">
+          <TimerCard
+            mode={state.mode}
+            status={state.status}
+            displayTime={displayTime}
+            activeTaskTitle={activeTask?.title}
+            activeTaskPomodoroIndex={activeTaskPomodoroIndex}
+            onStart={start}
+            onPause={pause}
+            onReset={reset}
+            onSetMode={setMode}
+          />
+          <TaskPanel
+            tasks={tasks}
+            activeTaskId={activeTaskId}
+            onSelectTask={setActiveTask}
+            onAddTask={addTask}
+            onUpdateTask={updateTask}
+            onToggleTask={toggleTask}
+            onDeleteTask={deleteTask}
+          />
+        </main>
+      </div>
     </div>
   )
 }

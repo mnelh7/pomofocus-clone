@@ -1,7 +1,7 @@
 ﻿.timer-card {
   margin: 36px auto 28px;
   padding: 30px 32px;
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--panel);
   border-radius: 12px;
   text-align: center;
   width: min(520px, 100%);
@@ -19,7 +19,7 @@
 .timer-card__tab {
   border: none;
   background: transparent;
-  color: #ffffff;
+  color: var(--text);
   font-size: 14px;
   padding: 8px 12px;
   border-radius: 8px;
@@ -27,21 +27,21 @@
 }
 
 .timer-card__tab--active {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--panel-2);
   font-weight: 600;
 }
 
 .timer-card__time {
   font-size: clamp(64px, 10vw, 112px);
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text);
   margin: 24px 0 18px;
   letter-spacing: 2px;
 }
 
 .timer-card__start {
-  background: #ffffff;
-  color: #ba3f3f;
+  background: var(--button-bg);
+  color: var(--button-text);
   border: none;
   border-radius: 8px;
   padding: 14px 52px;
@@ -57,7 +57,7 @@
   margin-top: 10px;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--muted);
   font-size: 14px;
   text-decoration: underline;
   cursor: pointer;
@@ -67,7 +67,7 @@
   margin-top: 22px;
   display: grid;
   gap: 8px;
-  color: #ffffff;
+  color: var(--text);
 }
 
 .timer-card__round {
@@ -78,3 +78,4 @@
 .timer-card__message {
   font-size: 16px;
 }
+

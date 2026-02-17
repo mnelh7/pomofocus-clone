@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 22px 0 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid var(--border);
 }
 
 .header__left {
@@ -12,14 +12,14 @@
   gap: 10px;
   font-weight: 700;
   font-size: 20px;
-  color: #ffffff;
+  color: var(--text);
 }
 
 .header__logo {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--text);
   position: relative;
   display: inline-block;
 }
@@ -29,8 +29,8 @@
   position: absolute;
   width: 6px;
   height: 10px;
-  border-right: 2px solid #ffffff;
-  border-bottom: 2px solid #ffffff;
+  border-right: 2px solid var(--text);
+  border-bottom: 2px solid var(--text);
   transform: rotate(45deg);
   top: 2px;
   left: 6px;
@@ -47,10 +47,10 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--panel);
   border: none;
   border-radius: 6px;
-  color: #ffffff;
+  color: var(--text);
   font-size: 14px;
   cursor: pointer;
 }
@@ -58,10 +58,10 @@
 .header__icon-button {
   width: 36px;
   height: 36px;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--panel-2);
   border: none;
   border-radius: 6px;
-  color: #ffffff;
+  color: var(--text);
   font-size: 20px;
   cursor: pointer;
 }
@@ -82,3 +82,4 @@
     flex-wrap: wrap;
   }
 }
+
