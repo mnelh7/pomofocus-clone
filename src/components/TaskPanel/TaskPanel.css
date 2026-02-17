@@ -124,6 +124,16 @@
   padding: 6px;
 }
 
+.task-panel__edit {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.82);
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
 .task-panel__form {
   border: 2px dashed rgba(255, 255, 255, 0.4);
   border-radius: 10px;
@@ -143,6 +153,52 @@
 .task-panel__note-label {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.78);
+}
+
+.task-panel__stepper-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.task-panel__stepper-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.task-panel__stepper-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.task-panel__stepper-button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.task-panel__stepper-input {
+  width: 58px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  text-align: center;
+  font-weight: 600;
+}
+
+.task-panel__stepper-input::-webkit-outer-spin-button,
+.task-panel__stepper-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .task-panel__textarea {
