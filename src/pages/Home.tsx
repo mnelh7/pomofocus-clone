@@ -24,6 +24,13 @@ function Home() {
     },
   })
 
+  const activeTask = activeTaskId
+    ? tasks.find((task) => task.id === activeTaskId)
+    : undefined
+  const activeTaskPomodoroIndex = activeTask
+    ? Math.min(activeTask.completedPomodoros + 1, activeTask.estimatedPomodoros)
+    : 1
+
   return (
     <div className="home">
       <Header />
@@ -32,6 +39,8 @@ function Home() {
           mode={state.mode}
           status={state.status}
           displayTime={displayTime}
+          activeTaskTitle={activeTask?.title}
+          activeTaskPomodoroIndex={activeTaskPomodoroIndex}
           onStart={start}
           onPause={pause}
           onReset={reset}

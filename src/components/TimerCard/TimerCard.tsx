@@ -5,6 +5,8 @@ type TimerCardProps = {
   mode: Mode
   status: Status
   displayTime: string
+  activeTaskTitle?: string
+  activeTaskPomodoroIndex?: number
   onStart: () => void
   onPause: () => void
   onReset: () => void
@@ -15,12 +17,16 @@ function TimerCard({
   mode,
   status,
   displayTime,
+  activeTaskTitle,
+  activeTaskPomodoroIndex,
   onStart,
   onPause,
   onReset,
   onSetMode,
 }: TimerCardProps) {
   const isRunning = status === 'running'
+  const roundLabel = `#${activeTaskPomodoroIndex ?? 1}`
+  const subtitle = activeTaskTitle?.trim() || 'Time to focus!'
 
   return (
     <section className="timer-card">
@@ -59,8 +65,8 @@ function TimerCard({
         Reset
       </button>
       <div className="timer-card__meta">
-        <span className="timer-card__round">#2</span>
-        <span className="timer-card__message">Time to focus!</span>
+        <span className="timer-card__round">{roundLabel}</span>
+        <span className="timer-card__message">{subtitle}</span>
       </div>
     </section>
   )
