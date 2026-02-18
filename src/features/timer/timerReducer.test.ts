@@ -61,4 +61,28 @@ describe('timerReducer', () => {
     expect(stillZero.remainingSeconds).toBe(0)
     expect(stillZero.status).toBe('idle')
   })
+
+  it('completeNow switches to shortBreak idle with shortBreak duration', () => {
+    const state = createState({
+      mode: 'pomodoro',
+      status: 'running',
+      remainingSeconds: 999,
+    })
+    const next = timerReducer(state, { type: 'completeNow' })
+    expect(next.mode).toBe('shortBreak')
+    expect(next.status).toBe('idle')
+    expect(next.remainingSeconds).toBe(state.durations.shortBreak)
+  })
+
+  it('completeNow uses current shortBreak duration from state', () => {
+    const state = createState({
+      durations: {
+        pomodoro: 1500,
+        shortBreak: 123,
+        longBreak: 900,
+      },
+    })
+    const next = timerReducer(state, { type: 'completeNow' })
+    expect(next.remainingSeconds).toBe(123)
+  })
 })
