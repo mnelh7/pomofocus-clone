@@ -9,6 +9,7 @@ type TimerCardProps = {
   activeTaskPomodoroIndex?: number
   onStart: () => void
   onPause: () => void
+  onCompleteNow: () => void
   onReset: () => void
   onSetMode: (mode: Mode) => void
 }
@@ -21,10 +22,12 @@ function TimerCard({
   activeTaskPomodoroIndex,
   onStart,
   onPause,
+  onCompleteNow,
   onReset,
   onSetMode,
 }: TimerCardProps) {
   const isRunning = status === 'running'
+  const canCompleteNow = isRunning && mode === 'pomodoro'
   const roundLabel = `#${activeTaskPomodoroIndex ?? 1}`
   const subtitle = activeTaskTitle?.trim() || 'Time to focus!'
 
@@ -54,13 +57,26 @@ function TimerCard({
         </button>
       </div>
       <div className="timer-card__time">{displayTime}</div>
-      <button
-        className="timer-card__start"
-        type="button"
-        onClick={isRunning ? onPause : onStart}
-      >
-        {isRunning ? 'PAUSE' : 'START'}
-      </button>
+      <div className="timer-card__actions">
+        <button
+          className="timer-card__start"
+          type="button"
+          onClick={isRunning ? onPause : onStart}
+        >
+          {isRunning ? 'PAUSE' : 'START'}
+        </button>
+        {canCompleteNow && (
+          <button
+            className="timer-card__complete-now"
+            type="button"
+            onClick={onCompleteNow}
+            aria-label="Complete now"
+            title="Complete current pomodoro"
+          >
+            {'>>'}
+          </button>
+        )}
+      </div>
       <button className="timer-card__reset" type="button" onClick={onReset}>
         Reset
       </button>

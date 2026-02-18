@@ -43,6 +43,13 @@ export function timerReducer(state: TimerState, action: TimerAction): TimerState
       }
       return { ...state, remainingSeconds: nextRemaining }
     }
+    case 'completeNow':
+      return {
+        ...state,
+        mode: 'shortBreak',
+        status: 'idle',
+        remainingSeconds: state.durations.shortBreak,
+      }
     case 'setDurations': {
       const nextDurations = { ...state.durations, ...action.durations }
       return {

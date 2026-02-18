@@ -43,6 +43,13 @@ export function useTimer(options?: UseTimerOptions) {
     displayTime,
     start: () => dispatch({ type: 'start' }),
     pause: () => dispatch({ type: 'pause' }),
+    completeNow: () => {
+      if (state.mode !== 'pomodoro') {
+        return
+      }
+      options?.onComplete?.('pomodoro')
+      dispatch({ type: 'completeNow' })
+    },
     reset: () => dispatch({ type: 'reset' }),
     setMode: (mode: Mode) => dispatch({ type: 'setMode', mode }),
     setDurations: (durations: Partial<TimerState['durations']>) =>

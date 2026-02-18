@@ -15,4 +15,5 @@ export type TimerAction =
   | { type: 'reset' }
   | { type: 'setMode'; mode: Mode }
   | { type: 'tick' }
+  | { type: 'completeNow' }
   | { type: 'setDurations'; durations: Partial<Record<Mode, number>> }
