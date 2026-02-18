@@ -16,7 +16,7 @@ function Home() {
     incrementTaskPomodoro,
   } = useTasks()
 
-  const { state, displayTime, start, pause, reset, setMode } = useTimer({
+  const { state, displayTime, start, pause, completeNow, reset, setMode } = useTimer({
     onComplete: (mode) => {
       if (mode === 'pomodoro' && activeTaskId) {
         incrementTaskPomodoro(activeTaskId)
@@ -45,6 +45,7 @@ function Home() {
             activeTaskPomodoroIndex={activeTaskPomodoroIndex}
             onStart={start}
             onPause={pause}
+            onCompleteNow={completeNow}
             onReset={reset}
             onSetMode={setMode}
           />
@@ -64,3 +65,4 @@ function Home() {
 }
 
 export default Home
+

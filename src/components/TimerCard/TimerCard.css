@@ -63,6 +63,28 @@
     color var(--theme-transition) ease;
 }
 
+.timer-card__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timer-card__complete-now {
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color var(--theme-transition) ease,
+    color var(--theme-transition) ease,
+    border-color var(--theme-transition) ease;
+}
+
 .timer-card__reset {
   margin-top: 10px;
   background: transparent;
