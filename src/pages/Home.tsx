@@ -1,10 +1,14 @@
-﻿import Header from '../components/Header/Header'
+import { useEffect, useState } from 'react'
+import Header from '../components/Header/Header'
 import TimerCard from '../components/TimerCard/TimerCard'
 import TaskPanel from '../components/TaskPanel/TaskPanel'
 import { useTimer } from '../features/timer/useTimer'
 import { useTasks } from '../features/tasks/useTasks'
+import { getHealth } from '../lib/api'
 
 function Home() {
+  const [apiStatus, setApiStatus] = useState('Checking API...')
+
   const {
     tasks,
     activeTaskId,
@@ -24,6 +28,30 @@ function Home() {
     },
   })
 
+  useEffect(() => {
+    let cancelled = false
+
+    const checkApi = async () => {
+      try {
+        const health = await getHealth()
+        if (!cancelled) {
+          setApiStatus(health.ok ? 'API OK' : 'API unavailable')
+        }
+      } catch (error) {
+        if (!cancelled) {
+          const message = error instanceof Error ? error.message : 'Unknown API error'
+          setApiStatus(`API error: ${message}`)
+        }
+      }
+    }
+
+    void checkApi()
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const activeTask = activeTaskId
     ? tasks.find((task) => task.id === activeTaskId)
     : undefined
@@ -36,6 +64,7 @@ function Home() {
     <div className="app-shell" data-theme={theme}>
       <div className="home">
         <Header />
+        <p className="home__api-status">{apiStatus}</p>
         <main className="home__main">
           <TimerCard
             mode={state.mode}
@@ -65,4 +94,3 @@ function Home() {
 }
 
 export default Home
-
