@@ -1,5 +1,6 @@
 {
   "version": "2.0",
+  "isDefaultHostConfig": true,
   "logging": {
     "applicationInsights": {
       "samplingSettings": {
